@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(content)">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>List Employee</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" th:href="@{/dist/css/popup_thong_bao.css}">
+  <link rel="stylesheet" th:href="@{/plugins/toastr/toastr.min.css}">
+
+  <!-- Theme style -->
+  <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
+  <link rel="stylesheet" th:href="@{/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}">
+  <link rel="stylesheet" th:href="@{/plugins/datatables-responsive/css/responsive.bootstrap4.min.css}">
+  <link rel="stylesheet" th:href="@{/plugins/datatables-buttons/css/buttons.bootstrap4.min.css}">
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <!-- Navbar -->
+
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <!-- Left navbar links -->
+
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" th:href="@{#}" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-widget="fullscreen" th:href="@{#}" role="button">
+            <i class="fas fa-expand-arrows-alt"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-widget="control-sidebar" data-slide="true" th:href="@{#}" role="button">
+            <i class="fas fa-th-large"></i>
+          </a>
+        </li>
+      </ul>
+
+
+
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+        <!-- Navbar Search -->
+
+
+        <!-- Messages Dropdown Menu -->
+        <!--  -->
+        <!-- Notifications Dropdown Menu -->
+
+
+      </ul>
+      <div class="user-panel mr-2 d-flex">
+        <div class="image">
+          <img th:src="@{/public/tom.jpg}" id="accImage" width="50" height="50"
+            style=" border-radius: 50%;object-fit: cover;text-align: center;" alt="User Avatar"
+            class="img-size-350  img-circle elevation-2">
+
+
+        </div>
+
+        <div class="info">
+          <a th:href="@{#}" id="accName" class="d-block"></a>
+        </div>
+      </div>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user (optional) -->
+
+
+
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+            <li class="nav-item menu-open">
+              <a th:href="@{#}" class="nav-link active">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                  Manager
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a th:href="@{/employee/add}" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Employee</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a th:href="@{/employee/list}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>List Employee</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a th:href="@{/customer/add}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Customer</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a th:href="@{/customer/list}" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>List Customer</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+              <!-- jquery validation -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">List Employee</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+
+
+                <div class="card-body " id="tableEmployee_wrapper">
+                  <table id="tableEmployee" class="table table-bordered table-hover ">
+                    <thead>
+                      <tr>
+                        <th>
+                          Select
+                        </th>
+                        <th>STT</th>
+                        <th hidden>Id</th>
+                        <th>Avatar</th>
+                        <th>Name</th>
+                        <th hidden>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                        <th>Role</th>
+                        <th>Function</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+
+
+                      <tr th:each="employee, i : ${eList}">
+                        <td>
+                          <div class="d-flex justify-content-center"><input type="checkbox" name="select" />
+                          </div>
+                        </td>
+                        <td th:text="${i.index + 1}" style="text-align: center;"></td>
+                        <td th:text="${employee.id}" class="id" hidden></td>
+                        <td class="avatar" style="text-align: center;">
+                          <div class="image">
+                            <img th:src="${employee.avatar}?@{${employee.avatar}}:@{/public/tom.jpg}" width="100"
+                              height="100" style=" border-radius: 50%;object-fit: cover;text-align: center;"
+                              alt="User Avatar" class="img-size-350  img-circle elevation-2">
+
+
+                          </div>
+                        </td>
+                        <td th:text="${employee.fullName}" class="fullName" style="text-align: center;"></td>
+                        <td th:text="${employee.email}" class="email" hidden></td>
+                        <td th:text="${employee.phone}" class="phone" style="text-align: center;"></td>
+                        <td th:text="${employee.address}" class="address"></td>
+                        <td th:text="${employee.status}" class="status"></td>
+                        <td th:text="${employee.role}?' admin':'employee'" class="role"></td>
+                        <td>
+                          <div class="d-flex justify-content-center"><button class="btn btnUpdate btn-warning "
+                              data-toggle="modal" data-target="#modal-update"><i
+                                class="fa-regular fa-pen-to-square"></i></button>
+                            <button class="btn btnAdd btn-success mr-2 ml-2"><i class="fa-regular fa-plus"></i></button>
+                            <button class="btn btnDelete btn-danger ">
+                              <i class="fa-solid fa-minus"></i></button>
+                          </div>
+                        </td>
+                      </tr>
+
+                    </tbody>
+                    <tfoot>
+                      <tr>
+                        <th>
+                          <div class="d-flex justify-content-center"><button class="btn btnDeleteAll btn-danger ">
+                              <i class="fa-solid fa-minus"></i></button></div>
+                        </th>
+                        <th>STT</th>
+                        <th hidden>Id</th>
+                        <th>Avatar</th>
+                        <th>Name</th>
+                        <th hidden>Email</th>
+                        <th>Phone</th>
+                        <th>Address</th>
+                        <th>Status</th>
+                        <th>Role</th>
+                        <th>Function</th>
+                      </tr>
+                    </tfoot>
+                  </table>
+                </div>
+
+              </div>
+              <!-- /.card -->
+            </div>
+            <!--/.col (left) -->
+            <!-- right column -->
+            <div class="col-md-6">
+
+            </div>
+            <!--/.col (right) -->
+          </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+        <div class="modal fade " id="modal-update">
+          <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title">Update Employee</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+
+                <div class="col-md-12 d-flex">
+                  <div class="col-sm-7">
+                    <form id="formUpdateEmployee">
+
+                      <!-- input states -->
+                      <div class="form-group row" style="position: relative;" hidden>
+                        <label for="InputFullName" class="col-sm-2 col-form-label">Id</label>
+                        <div class="col-sm-10 input">
+                          <input type="text" name="fullName" class="form-control" id="inputId"
+                            placeholder="Enter full name">
+                        </div>
+                        <p style="color: red;left: 100%;position: absolute;">*</p>
+                      </div>
+                      <div class="form-group row" style="position: relative;">
+                        <label for="InputFullName" class="col-sm-2 col-form-label">Full name</label>
+                        <div class="col-sm-10 input">
+                          <input type="text" name="fullName" class="form-control" id="inputFullName"
+                            placeholder="Enter full name">
+                        </div>
+                        <p style="color: red;left: 100%;position: absolute;">*</p>
+                      </div>
+                      <div class="form-group row">
+                        <label for="InputPhone" class="col-sm-2 col-form-label">Phone</label>
+                        <div class="col-sm-10 input">
+                          <input type="number" name="phone" class="form-control" id="inputPhone"
+                            placeholder="Enter phone">
+                        </div>
+                        <p style="color: red;left: 100%;position: absolute;">*</p>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="exampleInputEmail1" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10 input">
+                          <input type="email" name="email" class="form-control" id="inputEmail"
+                            placeholder="Enter email">
+                        </div>
+                        <p style="color: red;left: 100%;position: absolute;">*</p>
+                      </div>
+                      <div class="form-group row">
+                        <label for="InputAddress" class="col-sm-2 col-form-label">Address</label>
+                        <div class="col-sm-10 input">
+                          <input type="text" name="address" class="form-control" id="inputAddress"
+                            placeholder="Enter address">
+                        </div>
+                        <p style="color: red;left: 100%;position: absolute;">*</p>
+                      </div>
+
+
+
+                      <div class="form-group row">
+                        <label for="exampleSelectRounded0" class="col-sm-2 col-form-label">Status </label>
+                        <div class="col-sm-10 ">
+                          <select class=" form-control" id="status">
+                            <option value="Active">Active</option>
+                            <option value="Deactive">Deactive</option>
+
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleSelectRounded0" class="col-sm-2 col-form-label">Role </label>
+                        <div class="col-sm-10 ">
+                          <select class=" form-control" id="role">
+                            <option value="Employee">Employee</option>
+                            <option value="Admin">Admin</option>
+
+                          </select>
+                        </div>
+                      </div>
+                      <div class="form-group row" hidden>
+                        <label for="image" class="col-sm-2 col-form-label">hình </label>
+                        <div class="col-sm-10 ">
+                          <input type="file" id="inputImage" accept="image/*" onchange="handleImageSelect(event)">
+                        </div>
+                      </div>
+
+
+                      <!-- <div class="form-group">
+                        <label class="col-form-label" for="inputError"><i class="far fa-times-circle"></i> Input
+                          with
+                          error</label>
+                        <input type="text" class="form-control is-invalid" id="inputError"
+                          placeholder="Enter ...">
+                      </div> -->
+
+                      <!--  -->
+
+
+
+
+                    </form>
+                  </div>
+                  <div class="col-sm-5">
+                    <div class="d-flex justify-content-center mt-5">
+                      <div class="d-flex flex-column">
+                        <label style="text-align: center;"> Staff image</label>
+                        <div class="image " id="divImage">
+                          <img th:src="@{/public/tom.jpg}" id="imgEmployee" width="200" height="200"
+                            style=" border-radius: 50%;object-fit: cover;text-align: center;" alt="User Avatar"
+                            class="img-size-350  img-circle elevation-2">
+
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+
+                <!-- body modal -->
+
+              </div>
+              <div class="modal-footer justify-content-between">
+                <button type="button" id="closeModalUpdate" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                <button type="button" id="updateEmployee" class="btn btn-primary bg-warning"><i
+                    class="fa-regular fa-pen-to-square"></i>Chỉnh sửa</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+
+  <!-- jQuery -->
+  <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+  <!-- Bootstrap 4 -->
+  <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <!-- jquery-validation -->
+  <script th:src="@{/plugins/jquery-validation/jquery.validate.min.js}"></script>
+  <script th:src="@{/plugins/jquery-validation/additional-methods.min.js}"></script>
+  <!-- AdminLTE App -->
+  <script th:src="@{/dist/js/adminlte.min.js}"></script>
+  <script th:src="@{/plugins/toastr/toastr.min.js}"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script th:src="@{https://cdn.jsdelivr.net/npm/sweetalert2@11}"></script>
+  <script th:src="@{/dist/js/demo.js}"></script>
+  <script th:src="@{/plugins/datatables-buttons/js/buttons.html5.min.js}"></script>
+  <script th:src="@{/plugins/datatables-buttons/js/buttons.print.min.js}"></script>
+  <script th:src="@{/plugins/datatables-buttons/js/buttons.colVis.min.js}"></script>
+  <script th:src="@{/plugins/datatables/jquery.dataTables.min.js}"></script>
+  <script th:src="@{/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+  <script th:src="@{/plugins/datatables-responsive/js/dataTables.responsive.min.js}"></script>
+  <script th:src="@{/plugins/datatables-responsive/js/responsive.bootstrap4.min.js}"></script>
+  <script th:src="@{/plugins/datatables-buttons/js/dataTables.buttons.min.js}"></script>
+  <script th:src="@{/plugins/datatables-buttons/js/buttons.bootstrap4.min.js}"></script>
+
+  <!-- Page specific script -->
+  <script>
+
+    $(function () {
+      $("#tableEmployee").DataTable({
+        "responsive": true, "lengthChange": false, "autoWidth": false,
+        "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+      }).buttons().container().appendTo('#tableEmployee_wrapper .col-md-6:eq(0)');
+
+
+
+
+    });
+    async function getEmployeeByEmail(email) {
+      var employee;
+      try {
+        employee = await $.ajax({
+          type: "GET",
+          url: "/employee/search/email?email=" + email,
+          dataType: "json",
+          success: function (response) {
+
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            return null
+          }
+        });
+      } catch (error) {
+        employee = null;
+      }
+      return employee;
+
+    }
+    async function getEmployeeByPhone(phone) {
+      var employee;
+      try {
+        employee = await $.ajax({
+          type: "GET",
+          url: "/employee/search/phone?phone=" + phone,
+          dataType: "json",
+          success: function (response) {
+
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            return null
+          }
+        });
+      } catch (error) {
+        employee = null;
+      }
+      return employee;
+
+    }
+    async function duplicateCheck(email, phone, id) {
+      var phoneCheck;
+      var emailCheck;
+      var phoneRegex = /^\d{10}$/;
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!phoneRegex.test(phone)) {
+        var validator = $("#formUpdateEmployee").validate();
+        validator.showErrors({
+          phone: "Phone already exists." // Thông báo lỗi trùng email
+        });
+        return false;
+      }
+      if (!emailRegex.test(email)) {
+        var validator = $("#formUpdateEmployee").validate();
+        validator.showErrors({
+          email: "Email already exists." // Thông báo lỗi trùng email
+        });
+        return false;
+      }
+      if (email) {
+        emailCheck = await getEmployeeByEmailAndId(email, id);
+        if (emailCheck) {
+          var validator = $("#formUpdateEmployee").validate();
+          validator.showErrors({
+            email: "Email already exists." // Thông báo lỗi trùng email
+          });
+        }
+      }
+      if (phone) {
+        phoneCheck = await getEmployeeByPhoneAndId(phone, id);
+
+
+
+        if (phoneCheck) {
+          var validator = $("#formUpdateEmployee").validate();
+          validator.showErrors({
+            phone: "Phone already exists." // Thông báo lỗi trùng email
+          });
+        }
+
+      }
+
+
+
+      if (emailCheck || phoneCheck) {
+        return false;
+      } else {
+        return true;
+      }
+
+    }
+    async function getEmployeeByEmailAndId(email, id) {
+      var employee;
+      try {
+        employee = await $.ajax({
+          type: "GET",
+          url: "/employee/search/email-and-id?email=" + email + "&id=" + id,
+          dataType: "json",
+          success: function (response) {
+
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            return null
+          }
+        });
+      } catch (error) {
+        employee = null;
+      }
+      return employee;
+
+    }
+    async function getEmployeeByPhoneAndId(phone, id) {
+      var employee;
+      try {
+        employee = await $.ajax({
+          type: "GET",
+          url: "/employee/search/phone-and-id?phone=" + phone + "&id=" + id,
+          dataType: "json",
+          success: function (response) {
+
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            return null
+          }
+        });
+      } catch (error) {
+        employee = null;
+      }
+      return employee;
+
+    }
+    async function deleteEmployeeByPhone(phone) {
+      var url = "/employee/delete?phone=" + phone;
+      try {
+        await $.ajax({
+          url: url,
+          type: "GET",
+          contentType: "application/json",
+
+        });
+        return true;
+      } catch (error) {
+        return false;
+      }
+
+    }
+    $(".btnAdd").on("click", function () {
+      console.log("adc")
+      window.location.href = "/employee/add";
+    })
+    $(".btnDelete").on("click", function () {
+      var savedData = localStorage.getItem('acc');
+      if (savedData) {
+        // Parse the data from string to its original format
+        var parsedData = JSON.parse(savedData);
+        //console.log(parsedData.image)
+
+        if (parsedData.role) {
+          var phoneValue = $(this).closest('tr').find('.phone').text();
+          var idValue = $(this).closest('tr').find('.id').text();
+          if (idValue === parsedData.id.toString()) {
+            Swal.fire({
+              icon: 'error',
+              title: 'ERROR',
+              text: 'It you.',
+
+            })
+          } else {
+            //console.log(parsedData.id, idValue)
+            const swalWithBootstrapButtons = Swal.mixin({
+              customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger mr-4'
+              },
+              buttonsStyling: false
+            })
+            swalWithBootstrapButtons.fire({
+              title: 'Are you sure ?',
+              text: "Are you sure you want to delete!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'delete',
+              cancelButtonText: 'cancel',
+              reverseButtons: true
+            }).then(async (result) => {
+              if (result.isConfirmed) {
+
+
+
+                var result = await deleteEmployeeByPhone(phoneValue);
+                if (result) {
+                  Swal.fire(
+                    {
+
+                      icon: 'success',
+                      title: 'Success',
+                      showConfirmButton: false,
+                      timer: 1500
+                    })
+                  var row = $(this).closest('tr');
+                  row.remove().draw();
+                } else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Xóa không thành công',
+                    text: 'Xóa thông tin không thành công.',
+
+                  })
+                }
+
+
+
+              } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+              ) {
+
+              }
+            })
+          }
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'ERROR',
+            text: 'No right.',
+
+          })
+        }
+      } else {
+        // Handle the case when no data is found in localStorage
+        alert('Error');
+      }
+
+
+    })
+    $("#inputEmail").change(async function () {
+      var emailCheck = await getEmployeeByEmailAndId($("#inputEmail").val(), $("#inputId").val());
+      if (emailCheck) {
+        var validator = $("#formUpdateEmployee").validate();
+        validator.showErrors({
+          email: "Email already exists." // Thông báo lỗi trùng email
+        });
+      }
+    })
+    $("#inputPhone").change(async function () {
+      var phoneCheck = await getEmployeeByPhoneAndId($("#inputPhone").val(), $("#inputId").val());
+      if (phoneCheck) {
+        var validator = $("#formUpdateEmployee").validate();
+        validator.showErrors({
+          phone: "Phone already exists." // Thông báo lỗi trùng email
+        });
+      }
+    })
+    function createObjectEmployee(id, fullName, phone, email, address, userName, password, role, avatar, status) {
+      var object = {
+        id: id,
+        full_name: fullName,
+        phone: phone,
+        email: email,
+        address: address,
+        user_name: userName,
+        pass: password,
+        status: status,
+        role: role === "Employee" ? 0 : 1,
+        avatar: avatar
+      }
+      return object;
+    }
+    async function getImageData(imageUrl) {
+      // Gửi yêu cầu AJAX để lấy dữ liệu của hình ảnh
+      var data = await $.ajax({
+        url: "https://api.dropboxapi.com/2/files/get_temporary_link",
+        type: "POST",
+        headers: {
+          "Authorization": "Bearer Bearer sl.Bh4WNI82LjiJ0LCss3wvVYHGXf0MbkrkFRdtgutigAsV9-IvIeilTzGfCXcRV_p0WEZDnpoJyQMX3BByjeeJBd81PbCzbiofrZJSNa3DcNVoWcV-LS42WNgs2uF6SN6BI7JLxTUe2W4a",
+          "Content-Type": "application/json"
+        },
+        data: JSON.stringify({
+          path: imageUrl
+        }),
+        success: function (response) {
+          // Lấy URL tải xuống ảnh từ phản hồi
+          // var downloadUrl = response.link;
+
+          // // Sử dụng URL để hiển thị ảnh trong thẻ img
+          // $('#uploadedImage').attr('src', downloadUrl);
+        },
+        error: function (error) {
+          console.error('Error:', error);
+        }
+      });
+      return data.link;
+    }
+    async function updateImageToDropBox() {
+      // Lấy tệp hình ảnh được chọn
+      var imageFile = $('#inputImage')[0].files[0];
+
+      // Kiểm tra xem đã chọn hình ảnh hay chưa
+      if (imageFile) {
+        // Tạo đối tượng FormData để chứa tệp hình ảnh
+        // var newFileName = imageFile.name.replace(/\.[^/.]+$/, ".jpg");
+
+        // // Tạo đối tượng FormData để chứa tệp hình ảnh với tên mới
+        // var formData = new FormData();
+        // formData.append('file', imageFile, newFileName);
+        // console.log(formData);
+        // Gửi yêu cầu tải lên bằng AJAX
+        var data = await $.ajax({
+          url: 'https://content.dropboxapi.com/2/files/upload',
+          type: 'POST',
+          headers: {
+            'Authorization': 'Bearer Bearer sl.Bh4WNI82LjiJ0LCss3wvVYHGXf0MbkrkFRdtgutigAsV9-IvIeilTzGfCXcRV_p0WEZDnpoJyQMX3BByjeeJBd81PbCzbiofrZJSNa3DcNVoWcV-LS42WNgs2uF6SN6BI7JLxTUe2W4a',
+            'Content-Type': 'application/octet-stream',
+            'Dropbox-API-Arg': JSON.stringify({
+              'path': '/image.jpg',
+              'mode': 'add',
+              'autorename': true,
+              'mute': false
+            })
+          },
+          data: imageFile,
+          processData: false,
+          contentType: false,
+          success: function (data) {
+
+            // var imageUrl = data.path_display;
+
+            // getImageData(imageUrl);
+            // var downloadUrl = "https://www.dropbox.com/s/dl" + imageUrl.replace(/ /g, "%20");
+            // console.log('Uploaded image:', downloadUrl);
+            // $('#uploadedImage').attr('src', downloadUrl);
+          },
+          error: function (error) {
+            console.error('Upload error:', error);
+          }
+        });
+      } else {
+        alert('Vui lòng chọn một hình ảnh.');
+      }
+      return data.path_display;
+    }
+
+    $(".btnUpdate").on("click", async function () {
+      //load data on form
+      var emailValue = $(this).closest('tr').find('.email').text();
+      var phoneValue = $(this).closest('tr').find('.phone').text();
+      var fullNameValue = $(this).closest('tr').find('.fullName').text();
+      var addressValue = $(this).closest('tr').find('.address').text();
+      var roleValue = $(this).closest('tr').find('.role').text();
+      var statusValue = $(this).closest('tr').find('.status').text();
+      var idValue = $(this).closest('tr').find('.id').text();
+      var employee = await getEmployeeByPhone(phoneValue);
+      $("#inputId").val(idValue);
+      $("#inputFullName").val(fullNameValue);
+      $("#inputPhone").val(phoneValue);
+      $("#inputEmail").val(emailValue);
+      $("#inputAddress").val(addressValue);
+      $('#imgEmployee').attr('src', employee.avatar ? employee.avatar : "/public/tom.jpg");
+      // var employee = await getEmployeeByPhoneAndId(phoneValue, 2);
+
+      // console.log(employee);
+      $("#role").val(roleValue === "employee" ? "Employee" : "Admin");
+      $("#status").val(statusValue === "active" ? "Active" : "Deactive");
+      //$("#inputPhoneUpdate").val(phoneValue);
+    })
+    $("#updateEmployee").on("click", function () {
+      $('#formUpdateEmployee').submit();
+    })
+    async function updateEmployee(data) {
+      var url = "/employee/update";
+      try {
+        await $.ajax({
+          url: url,
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(data),
+          success: function (response) {
+            return true;
+          },
+          error: function (xhr) {
+            return false;
+          }
+        });
+        return true;
+      } catch (error) {
+        return false;
+      }
+
+    }
+    function waitCreate() {
+      let timerInterval
+      Swal.fire({
+        title: 'Wait for more staff!',
+        html: 'Wait <b></b> milliseconds.',
+        timer: 5000,
+        timerProgressBar: true,
+        didOpen: () => {
+          Swal.showLoading()
+          const b = Swal.getHtmlContainer().querySelector('b')
+          timerInterval = setInterval(() => {
+            b.textContent = Swal.getTimerLeft()
+          }, 100)
+        },
+        willClose: () => {
+          clearInterval(timerInterval)
+        }
+      }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+          console.log('I was closed by the timer')
+        }
+      })
+    }
+    $(function () {
+
+      var savedData = localStorage.getItem('acc');
+      if (savedData) {
+        // Parse the data from string to its original format
+        var parsedData = JSON.parse(savedData);
+        //console.log(parsedData.image)
+        $('#accImage').attr('src', parsedData.avatar);
+        $("#accName").text(parsedData.full_name);
+        // Use the retrieved data as needed
+
+      } else {
+        // Handle the case when no data is found in localStorage
+        alert('Error');
+      }
+      $('#formUpdateEmployee').submit(async function (event) {
+        event.preventDefault();
+        try {
+
+          // alert("Form successful submitted!");
+          //lay gia tri
+          var fullName = $("#inputFullName").val();
+          var phone = $("#inputPhone").val();
+          var email = $("#inputEmail").val();
+          var address = $("#inputAddress").val();
+          var id = $("#inputId").val();
+          var status = $("#status").val() === "Active" ? "active" : "deactive";
+          var role = $("#role").val();
+          var imageFile = $('#inputImage')[0].files[0];
+          var linkImage = null;
+          //kt trung
+          var checkInput = false;
+          checkInput = await duplicateCheck(email, phone, id)
+
+          if (checkInput && fullName && phone && email && address) {
+            //tao employee
+            waitCreate()
+            if (imageFile) {
+              var path_display = await updateImageToDropBox();
+              // co tao link
+              linkImage = await getImageData(path_display);
+            }
+            var object = createObjectEmployee(id, fullName, phone, email, address, null, null, role, linkImage, status);
+            var stateCreateEmployee = await updateEmployee(object);
+            if (stateCreateEmployee) {
+              var savedData = localStorage.getItem('acc');
+              if (savedData) {
+                // Parse the data from string to its original format
+                var parsedData = JSON.parse(savedData);
+                if (id === parsedData.id.toString()) {
+                  parsedData.full_name = fullName;
+                  if (linkImage) {
+                    parsedData.avatar = linkImage;
+                  }
+                  localStorage.removeItem('acc');
+
+                  localStorage.setItem('acc', JSON.stringify(parsedData));
+                }
+              }
+
+              Swal.fire(
+                {
+
+                  icon: 'success',
+                  title: 'Success',
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+              //
+
+              //
+              //tieeps tucj submit
+              // $(this).unbind("submit").submit();
+              setTimeout(function () {
+                location.reload();
+              }, 1600);
+
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Chỉnh sửa thông tin không thành công',
+                text: 'Chỉnh sửa thông tin không thành công.',
+
+              })
+            }
+
+
+          } else {
+            //ko tao employee
+          }
+        } catch (error) {
+          alert(error)
+        }
+      })
+      $('#formUpdateEmployee').validate({
+        rules: {
+          email: {
+            required: true,
+            email: true,
+          },
+
+          fullName: {
+            required: true,
+
+          },
+          phone: {
+            required: true,
+            minlength: 10,
+            maxlength: 10,
+          },
+          address: {
+            required: true,
+
+          },
+
+        },
+        messages: {
+          email: {
+            required: "Please enter a email address",
+            email: "Please enter a valid email address"
+          },
+          fullName: {
+            required: "Please enter full name",
+
+          },
+          phone: {
+            required: "Please enter a phone",
+            minlength: "Please enter a valid phone",
+            maxlength: "Please enter a valid phone",
+          },
+          address: {
+            required: "Please enter a address",
+
+          },
+
+
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.input').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      });
+    });
+    $(".btnDeleteAll").on("click", function () {
+      var savedData = localStorage.getItem('acc');
+      if (savedData) {
+        // Parse the data from string to its original format
+        var parsedData = JSON.parse(savedData);
+        //console.log(parsedData.image)
+        if (parsedData.role) {
+
+          var checkedPhones = [];
+
+          // Find all the checked checkboxes and retrieve the corresponding ID
+          $('input[type="checkbox"]:checked').each(function () {
+            // Get the closest <tr> element
+            var row = $(this).closest('tr');
+
+            // Get the ID value from the hidden <td> element
+            var phone = row.find('.phone').text();
+            var idValue = row.find('.id').text();
+            if (idValue === parsedData.id.toString()) {
+
+              Swal.fire({
+                icon: 'error',
+                title: 'ERROR',
+                text: 'It you.',
+
+              })
+              $(this).prop('checked', false)
+            } else {
+              checkedPhones.push(phone);
+            }
+            // Add the ID to the array
+
+          });
+          if (checkedPhones.length === 1) {
+            toastr.info('Select the row you want to delete.');
+          } else {
+            console.log(checkedPhones);
+            const swalWithBootstrapButtons = Swal.mixin({
+              customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger mr-4'
+              },
+              buttonsStyling: false
+            })
+            swalWithBootstrapButtons.fire({
+              title: 'Are you sure ?',
+              text: "Are you sure you want to delete!",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonText: 'delete',
+              cancelButtonText: 'cancel',
+              reverseButtons: true
+            }).then(async (result) => {
+              if (result.isConfirmed) {
+                var result = false;
+
+                try {
+                  for (let index = 0; index < checkedPhones.length; index++) {
+                    const element = checkedPhones[index];
+                    if (element) {
+                      await deleteEmployeeByPhone(element);
+                      $('input[type="checkbox"]:checked').each(function () {
+                        // Get the closest <tr> element
+                        var row = $(this).closest('tr');
+
+                        // Remove the row
+                        row.remove();
+
+                      });
+                    } else {
+                      Swal.fire({
+                        icon: 'error',
+                        title: 'Xóa không thành công',
+                        text: 'Xóa thông tin không thành công.',
+
+                      })
+                    }
+
+                  }
+
+                  result = true;
+                } catch (error) {
+                  result = false;
+                }
+
+                if (result) {
+                  Swal.fire(
+                    {
+
+                      icon: 'success',
+                      title: 'Success',
+                      showConfirmButton: false,
+                      timer: 1500
+                    })
+
+                } else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Xóa không thành công',
+                    text: 'Xóa thông tin không thành công.',
+
+                  })
+                }
+
+
+
+              } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+              ) {
+
+              }
+            })
+          }
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'ERROR',
+            text: 'No right.',
+
+          })
+        }
+        // Use the retrieved data as needed
+
+      } else {
+        // Handle the case when no data is found in localStorage
+        alert('Error');
+      }
+
+      // Log the array of checked IDs
+
+
+    })
+    $("#divImage").on("click", function () {
+      $("#inputImage").click();
+    })
+    function handleImageSelect(event) {
+      var imageFile = event.target.files[0];
+
+      // Kiểm tra xem đã chọn hình ảnh hay chưa
+      if (imageFile) {
+        var reader = new FileReader();
+
+        // Đọc tệp ảnh và gán vào thuộc tính src của thẻ <img>
+        reader.onload = function (e) {
+          $('#imgEmployee').attr('src', e.target.result);
+        };
+
+        reader.readAsDataURL(imageFile);
+      }
+    }
+  </script>
+</body>
+
+</html>

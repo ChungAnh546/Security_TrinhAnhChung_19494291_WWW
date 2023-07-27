@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Add Customer</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
+  <!-- Theme style -->
+  <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <!-- Navbar -->
+
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <!-- Left navbar links -->
+
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" th:href="@{#}" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-widget="fullscreen" th:href="@{#}" role="button">
+            <i class="fas fa-expand-arrows-alt"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-widget="control-sidebar" data-slide="true" th:href="@{#}" role="button">
+            <i class="fas fa-th-large"></i>
+          </a>
+        </li>
+      </ul>
+
+
+
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+        <!-- Navbar Search -->
+
+
+        <!-- Messages Dropdown Menu -->
+        <!--  -->
+        <!-- Notifications Dropdown Menu -->
+
+
+      </ul>
+      <div class="user-panel mr-2 d-flex">
+        <div class="image">
+          <img th:src="@{/public/tom.jpg}" id="accImage" width="50" height="50" class="img-circle elevation-2"
+            alt="User Image">
+        </div>
+        <div class="info">
+          <a th:href="@{#}" id="accName" class="d-block"></a>
+        </div>
+      </div>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user (optional) -->
+
+
+
+
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <!-- Add icons to the links using the .nav-icon class
+               with font-awesome or any other icon font library -->
+
+            <li class="nav-item menu-open">
+              <a th:href="@{#}" class="nav-link active">
+                <i class="nav-icon fas fa-edit"></i>
+                <p>
+                  Manager
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a th:href="@{/employee/add}" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Employee</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a th:href="@{/employee/list}" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>List Employee</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a th:href="@{/customer/add}" class="nav-link active">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Add Customer</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a th:href="@{/customer/list}" class="nav-link ">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>List Customer</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
+          </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+              <!-- jquery validation -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Add Customer</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form id="quickForm">
+                  <div class="card-body d-flex justify-content-center">
+                    <div class=" column" style="width: 85%;">
+                      <div class="form-group row" style="position: relative;">
+                        <label for="InputFullName" class="col-sm-2 col-form-label">Customer name</label>
+                        <div class="col-sm-9 input">
+                          <input type="text" name="fullName" class="form-control" id="inputFullName"
+                            placeholder="Enter full name">
+                        </div>
+
+                      </div>
+                      <div class="form-group row">
+                        <label for="InputAddress" class="col-sm-2 col-form-label">Address</label>
+                        <div class="col-sm-9 input">
+                          <input type="text" name="address" class="form-control" id="inputAddress"
+                            placeholder="Enter address">
+                        </div>
+
+                      </div>
+                      <div class="form-group row">
+                        <label for="InputPhone" class="col-sm-2 col-form-label">Phone</label>
+                        <div class="col-sm-9 input">
+                          <input type="number" name="phone" class="form-control" id="inputPhone"
+                            placeholder="Enter phone">
+                        </div>
+
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="exampleInputEmail1" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-9 input">
+                          <input type="email" name="email" class="form-control" id="inputEmail"
+                            placeholder="Enter email">
+                        </div>
+
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="exampleSelectRounded0" class="col-sm-2 col-form-label">Status </label>
+                        <div class="col-sm-9 ">
+                          <select class=" form-control" id="status">
+                            <option>Active</option>
+                            <option>Deactive</option>
+
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer d-flex justify-content-center ">
+                    <button id="btnSave" class="btn btn-success"><i class="fa-regular fa-floppy-disk"></i>
+                      Save</button>
+                    <button type="cancel" class="btn btn-info ml-5" id="btnCancel"><i
+                        class="fa-solid fa-rotate-right"></i> Cancel</button>
+                    <!-- <button type="submit" hidden></button> -->
+                  </div>
+                </form>
+              </div>
+              <!-- /.card -->
+            </div>
+            <!--/.col (left) -->
+            <!-- right column -->
+            <div class="col-md-6">
+
+            </div>
+            <!--/.col (right) -->
+          </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+
+  <!-- jQuery -->
+  <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+  <!-- Bootstrap 4 -->
+  <script th:src="@{https://cdn.jsdelivr.net/npm/sweetalert2@11}"></script>
+  <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <!-- jquery-validation -->
+  <script th:src="@{/plugins/jquery-validation/jquery.validate.min.js}"></script>
+  <script th:src="@{/plugins/jquery-validation/additional-methods.min.js}"></script>
+  <!-- AdminLTE App -->
+  <script th:src="@{/dist/js/adminlte.min.js}"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script th:src="@{/dist/js/demo.js}"></script>
+  <!-- Page specific script -->
+  <script>
+    async function createCustomer(dataCustomer, dataCustomerMail) {
+      var requestData = {
+        customer: dataCustomer,
+        customerMail: dataCustomerMail
+      };
+      var url = "/customer/create";
+      try {
+        await $.ajax({
+          url: url,
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(requestData),
+          success: function (response) {
+            return true;
+          },
+          error: function (xhr) {
+            return false;
+          }
+        });
+        return true;
+      } catch (error) {
+        return false;
+      }
+
+    }
+
+
+
+
+
+    function createObjectCustomer(fullName, phone, address, status) {
+      var object = {
+        customer_name: fullName,
+        phone: phone,
+
+        address: address,
+        take_note: null,
+        employee_id: null,
+        status: status,
+
+      }
+      return object;
+    }
+    function createObjectCustomerMail(email) {
+      var object = {
+        customer_id: null,
+        mail: email
+
+      }
+      return object;
+    }
+    // $("#btnSave").on("click", async function () {
+    //   try {
+    //     // alert("Form successful submitted!");
+    //     var fullName = $("#inputFullName").val();
+    //     var phone = $("#inputPhone").val();
+    //     var email = $("#inputEmail").val();
+    //     var address = $("#inputAddress").val();
+    //     var userName = $("#inputUserName").val();
+    //     var password = $("#inputPassword").val();
+    //     var role = $("#role").val();
+    //     var checkInput = await duplicateCheck(email, phone, userName)
+    //     // var object = createObjectEmployee(fullName, phone, email, address, userName, password, role, null);
+    //     // var stateCreateEmployee = await createEmployee(object);
+    //     // setTimeout(function () {
+    //     //   if (stateCreateEmployee) {
+    //     //     alert("tao thanh cong");
+    //     //   } else {
+    //     //     alert("tao that bai");
+    //     //   }
+    //     // }, 1000);
+    //     if (checkInput) {
+    //       alert("input ok")
+    //     } else {
+    //       alert("input ko hopwj le")
+    //     }
+    //   } catch (error) {
+    //     alert(error)
+    //   }
+    // })
+    $(function () {
+      // $.validator.setDefaults({
+      //   submitHandler: async function (event) {
+      //     try {
+      //       event.preventDefault();
+      //       // alert("Form successful submitted!");
+      //       var fullName = $("#inputFullName").val();
+      //       var phone = $("#inputPhone").val();
+      //       var email = $("#inputEmail").val();
+      //       var address = $("#inputAddress").val();
+      //       var userName = $("#inputUserName").val();
+      //       var password = $("#inputPassword").val();
+      //       var role = $("#role").val();
+      //       var checkInput = await duplicateCheck(email, phone, userName)
+      //       // var object = createObjectEmployee(fullName, phone, email, address, userName, password, role, null);
+      //       // var stateCreateEmployee = await createEmployee(object);
+      //       // setTimeout(function () {
+      //       //   if (stateCreateEmployee) {
+      //       //     alert("tao thanh cong");
+      //       //   } else {
+      //       //     alert("tao that bai");
+      //       //   }
+      //       // }, 1000);
+      //       if (checkInput) {
+      //         alert("input ok")
+      //       } else {
+      //         alert("input ko hopwj le")
+      //       }
+      //     } catch (error) {
+      //       alert(error)
+      //     }
+
+
+      //   }
+      // });
+      var savedData = localStorage.getItem('acc');
+      if (savedData) {
+        // Parse the data from string to its original format
+        var parsedData = JSON.parse(savedData);
+        //console.log(parsedData.image)
+        $('#accImage').attr('src', parsedData.avatar);
+        $("#accName").text(parsedData.full_name);
+        // Use the retrieved data as needed
+
+      } else {
+        // Handle the case when no data is found in localStorage
+        alert('Error');
+      }
+      $("#inputEmail").change(async function () {
+        try {
+          var emailCheck = await getCustomerMailByEmail($("#inputEmail").val());
+          if (emailCheck) {
+            var validator = $("#quickForm").validate();
+            validator.showErrors({
+              email: "Email already exists." // Thông báo lỗi trùng email
+            });
+          }
+        } catch (error) {
+
+
+
+          var validator = $("#quickForm").validate();
+          validator.showErrors({
+            email: "Email already exists." // Thông báo lỗi trùng email
+          });
+
+        }
+      })
+      $("#inputPhone").change(async function () {
+        var phone = await getCustomerByPhone($("#inputPhone").val());
+        if (phone) {
+          var validator = $("#quickForm").validate();
+          validator.showErrors({
+            phone: "Phone already exists." // Thông báo lỗi trùng email
+          });
+        }
+      })
+      async function duplicateCheck(email, phone) {
+        var emailCheck;
+        var phoneRegex = /^\d{10}$/;
+        var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!phoneRegex.test(phone)) {
+          var validator = $("#quickForm").validate();
+          validator.showErrors({
+            phone: "Phone already exists." // Thông báo lỗi trùng email
+          });
+          return false;
+        }
+        if (!emailRegex.test(email)) {
+          var validator = $("#quickForm").validate();
+          validator.showErrors({
+            email: "Email already exists." // Thông báo lỗi trùng email
+          });
+          return false;
+        }
+        try {
+          emailCheck = await getCustomerMailByEmail(email);
+
+          if (emailCheck) {
+            var validator = $("#quickForm").validate();
+            validator.showErrors({
+              email: "Email already exists." // Thông báo lỗi trùng email
+            });
+          }
+        } catch (error) {
+          emailCheck = true;
+
+
+          var validator = $("#quickForm").validate();
+          validator.showErrors({
+            email: "Email already exists." // Thông báo lỗi trùng email
+          });
+
+        }
+
+
+        var phoneCheck = await getCustomerByPhone(phone);
+
+
+
+        if (phoneCheck) {
+          var validator = $("#quickForm").validate();
+          validator.showErrors({
+            phone: "Phone already exists." // Thông báo lỗi trùng email
+          });
+        }
+
+
+        if (phoneCheck || emailCheck) {
+          return false;
+        } else {
+
+          return true;
+        }
+
+      }
+      async function getCustomerMailByEmail(email) {
+        var customer;
+        try {
+          customer = await $.ajax({
+            type: "GET",
+            url: "/customer-mail/search/email?email=" + email,
+            dataType: "json",
+            success: function (response) {
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+              return null
+            }
+          });
+        } catch (error) {
+          customer = null;
+        }
+        return customer;
+
+      }
+      async function getCustomerByPhone(phone) {
+        var customer;
+        try {
+          customer = await $.ajax({
+            type: "GET",
+            url: "/customer/search/phone?phone=" + phone,
+            dataType: "json",
+            success: function (response) {
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+              return null
+            }
+          });
+        } catch (error) {
+          customer = null;
+        }
+        return customer;
+
+      }
+      function waitCreate() {
+        let timerInterval
+        Swal.fire({
+          title: 'Wait for more staff!',
+          html: 'Wait <b></b> milliseconds.',
+          timer: 5000,
+          timerProgressBar: true,
+          didOpen: () => {
+            Swal.showLoading()
+            const b = Swal.getHtmlContainer().querySelector('b')
+            timerInterval = setInterval(() => {
+              b.textContent = Swal.getTimerLeft()
+            }, 100)
+          },
+          willClose: () => {
+            clearInterval(timerInterval)
+          }
+        }).then((result) => {
+          /* Read more about handling dismissals below */
+          if (result.dismiss === Swal.DismissReason.timer) {
+            console.log('I was closed by the timer')
+          }
+        })
+      }
+      var isSubmitting = false;
+      $('#quickForm').submit(async function (event) {
+        event.preventDefault();
+        if (!isSubmitting) {
+          isSubmitting = true;
+          try {
+
+            // alert("Form successful submitted!");
+            //lay gia tri
+            var fullName = $("#inputFullName").val();
+            var phone = $("#inputPhone").val();
+            var email = $("#inputEmail").val();
+            var address = $("#inputAddress").val();
+
+            var status = $("#status").val() === "Active" ? "active" : "deactive";
+            //kt trung
+            var checkInput = false;
+            checkInput = await duplicateCheck(email, phone)
+            if (checkInput && fullName && phone && email && address) {
+              //tao employee
+              waitCreate();
+              var objectCustomer = createObjectCustomer(fullName, phone, address, status);
+              var objectCustomerMail = createObjectCustomerMail(email);
+              var stateCreateCustomer = await createCustomer(objectCustomer, objectCustomerMail);
+              if (stateCreateCustomer) {
+                Swal.fire(
+                  {
+
+                    icon: 'success',
+                    title: 'Success',
+                    showConfirmButton: false,
+                    timer: 1500
+                  })
+                setTimeout(function () {
+                  window.location.href = "/customer/list";
+                }, 1600);
+              } else {
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Thêm thông tin không thành công',
+                  text: 'Thêm thông tin không thành công.',
+
+                })
+              }
+
+              //tieeps tucj submit
+              // $(this).unbind("submit").submit();
+            } else {
+              //ko tao employee
+            }
+          } catch (error) {
+            alert(error)
+          }
+        }
+      })
+      $('#quickForm').validate({
+        rules: {
+          email: {
+            required: true,
+            email: true,
+          },
+
+          fullName: {
+            required: true,
+
+          },
+          phone: {
+            required: true,
+            minlength: 10, maxlength: 10
+          },
+          address: {
+            required: true,
+
+          },
+
+        },
+        messages: {
+          email: {
+            required: "Please enter a email address",
+            email: "Please enter a valid email address"
+          },
+          fullName: {
+            required: "Please enter full name",
+
+          },
+          phone: {
+            required: "Please enter a phone",
+            minlength: "Please enter a valid phone",
+            maxlength: "Please enter a valid phone"
+          },
+          address: {
+            required: "Please enter a address",
+
+          },
+
+
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.input').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      });
+    });
+    $("#btnCancel").on("click", function () {
+      $("input").val("");
+      $("select").val("Active");
+    })
+
+  </script>
+</body>
+
+</html>

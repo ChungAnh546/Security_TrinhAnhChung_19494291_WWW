@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Update Employee</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
+  <!-- Theme style -->
+  <link rel="stylesheet" th:href="@{/dist/css/adminlte.min.css}">
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
+    <!-- Navbar -->
+
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <!-- Left navbar links -->
+
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" th:href="@{#}" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-widget="fullscreen" th:href="@{#}" role="button">
+            <i class="fas fa-expand-arrows-alt"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-widget="control-sidebar" data-slide="true" th:href="@{#}" role="button">
+            <i class="fas fa-th-large"></i>
+          </a>
+        </li>
+      </ul>
+
+
+
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+        <!-- Navbar Search -->
+
+
+        <!-- Messages Dropdown Menu -->
+        <!--  -->
+        <!-- Notifications Dropdown Menu -->
+
+
+      </ul>
+      <div class="user-panel mr-2 d-flex">
+        <div class="image">
+          <img th:src="@{/dist/img/user2-160x160.jpg}" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a th:href="@{#}" class="d-block">Chung code đần</a>
+        </div>
+      </div>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Brand Logo -->
+
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar user (optional) -->
+
+
+
+
+        <!-- Sidebar Menu -->
+
+        <!-- /.sidebar-menu -->
+      </div>
+      <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+
+
+      <!-- Main content -->
+      <section class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- left column -->
+            <div class="col-md-12">
+              <!-- jquery validation -->
+              <div class="card card-primary">
+                <div class="card-header">
+                  <h3 class="card-title">Update Employee</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form id="quickForm">
+                  <div class="card-body row">
+                    <div class="col-sm-6 ">
+                      <div class="form-group row">
+                        <label for="InputFullName" class="col-sm-2 col-form-label">Full name</label>
+                        <div class="col-sm-10 input">
+                          <input type="text" name="fullName" class="form-control" id="inputFullName"
+                            placeholder="Enter full name">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="InputPhone" class="col-sm-2 col-form-label">Phone</label>
+                        <div class="col-sm-10 input">
+                          <input type="number" name="phone" class="form-control" id="inputPhone"
+                            placeholder="Enter phone">
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="exampleInputEmail1" class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10 input">
+                          <input type="email" name="email" class="form-control" id="inputEmail"
+                            placeholder="Enter email">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="InputAddress" class="col-sm-2 col-form-label">Address</label>
+                        <div class="col-sm-10 input">
+                          <input type="text" name="address" class="form-control" id="inputAddress"
+                            placeholder="Enter address">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="InputUserName" class="col-sm-2 col-form-label">User Name</label>
+                        <div class="col-sm-10 input">
+                          <input type="text" name="userName" class="form-control" id="inputUserName"
+                            placeholder="Enter user name">
+                        </div>
+                      </div>
+
+                      <div class="form-group row">
+                        <label for="exampleInputPassword1" class="col-sm-2 col-form-label">Password</label>
+                        <div class="col-sm-10 input">
+                          <input type="password" name="password" class="form-control" id="inputPassword"
+                            placeholder="Password">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inputConfirmPassword1" class="col-sm-2 col-form-label">Confirm password</label>
+                        <div class="col-sm-10 input">
+                          <input type="password" name="confirmPassword" class="form-control" id="inputConfirmPassword1"
+                            placeholder="Cofirm Password">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="exampleSelectRounded0" class="col-sm-2 col-form-label">Role </label>
+                        <div class="col-sm-10 ">
+                          <select class=" form-control" id="role">
+                            <option>Employee</option>
+                            <option>Admin</option>
+
+                          </select>
+                        </div>
+                      </div>
+
+                    </div>
+                    <div class="col-sm-6">
+                      <div class="d-flex justify-content-center mt-5">
+                        <div class="d-flex flex-column">
+                          <label style="text-align: center;">Chung ước làm ca sĩ</label>
+                          <div class="image ">
+                            <img th:src="@{/public/tom.jpg}" width="200" height="200"
+                              style=" border-radius: 50%;object-fit: cover;text-align: center;" alt="User Avatar"
+                              class="img-size-350  img-circle elevation-2">
+
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+                  <div class="card-footer d-flex justify-content-center ">
+                    <button id="btnSave" class="btn btn-success"><i class="fa-regular fa-floppy-disk"></i>
+                      Save</button>
+                    <button type="cancel" class="btn btn-info ml-5" id="btnCancel"><i
+                        class="fa-solid fa-rotate-right"></i> Cancel</button>
+                    <!-- <button type="submit" hidden></button> -->
+                  </div>
+                </form>
+              </div>
+              <!-- /.card -->
+            </div>
+            <!--/.col (left) -->
+            <!-- right column -->
+            <div class="col-md-6">
+
+            </div>
+            <!--/.col (right) -->
+          </div>
+          <!-- /.row -->
+        </div><!-- /.container-fluid -->
+      </section>
+      <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+      <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+  </div>
+  <!-- ./wrapper -->
+
+  <!-- jQuery -->
+  <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+  <!-- Bootstrap 4 -->
+  <script th:src="@{https://cdn.jsdelivr.net/npm/sweetalert2@11}"></script>
+  <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <!-- jquery-validation -->
+  <script th:src="@{/plugins/jquery-validation/jquery.validate.min.js}"></script>
+  <script th:src="@{/plugins/jquery-validation/additional-methods.min.js}"></script>
+  <!-- AdminLTE App -->
+  <script th:src="@{/dist/js/adminlte.min.js}"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script th:src="@{/dist/js/demo.js}"></script>
+  <!-- Page specific script -->
+  <script>
+    async function createEmployee(data) {
+      var url = "/employee/create";
+      try {
+        await $.ajax({
+          url: url,
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(data),
+          success: function (response) {
+            return true;
+          },
+          error: function (xhr) {
+            return false;
+          }
+        });
+        return true;
+      } catch (error) {
+        return false;
+      }
+
+    }
+    async function getEmployeeByEmail(email) {
+      var employee;
+      try {
+        employee = await $.ajax({
+          type: "GET",
+          url: "/employee/search/email?email=" + email,
+          dataType: "json",
+          success: function (response) {
+
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            return null
+          }
+        });
+      } catch (error) {
+        employee = null;
+      }
+      return employee;
+
+    }
+    async function getEmployeeByPhone(phone) {
+      var employee;
+      try {
+        employee = await $.ajax({
+          type: "GET",
+          url: "/employee/search/phone?phone=" + phone,
+          dataType: "json",
+          success: function (response) {
+
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            return null
+          }
+        });
+      } catch (error) {
+        employee = null;
+      }
+      return employee;
+
+    }
+    async function getEmployeeByUserName(userName) {
+      var employee;
+      try {
+        employee = await $.ajax({
+          type: "GET",
+          url: "/employee/search/user-name?userName=" + userName,
+          dataType: "json",
+          success: function (response) {
+
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            return null
+          }
+        });
+      } catch (error) {
+        employee = null;
+      }
+      return employee;
+
+    }
+    $("#inputEmail").change(async function () {
+      var email = await getEmployeeByEmail($("#inputEmail").val());
+      if (email) {
+        var validator = $("#quickForm").validate();
+        validator.showErrors({
+          email: "Email already exists." // Thông báo lỗi trùng email
+        });
+      }
+    })
+    $("#inputPhone").change(async function () {
+      var phone = await getEmployeeByPhone($("#inputPhone").val());
+      if (phone) {
+        var validator = $("#quickForm").validate();
+        validator.showErrors({
+          phone: "Phone already exists." // Thông báo lỗi trùng email
+        });
+      }
+    })
+    $("#inputUserName").change(async function () {
+
+      var userName = await getEmployeeByUserName($("#inputUserName").val());
+      console.log(userName)
+      if (userName) {
+        var validator = $("#quickForm").validate();
+        validator.showErrors({
+          userName: "User Name already exists." // Thông báo lỗi trùng email
+        });
+      }
+    })
+    async function duplicateCheck(email, phone, userName) {
+
+      var email = await getEmployeeByEmail(email);
+
+      var phone = await getEmployeeByPhone(phone);
+
+      var userName = await getEmployeeByUserName(userName);
+      if (email) {
+        var validator = $("#quickForm").validate();
+        validator.showErrors({
+          email: "Email already exists." // Thông báo lỗi trùng email
+        });
+      }
+      if (phone) {
+        var validator = $("#quickForm").validate();
+        validator.showErrors({
+          phone: "Phone already exists." // Thông báo lỗi trùng email
+        });
+      }
+      if (userName) {
+        var validator = $("#quickForm").validate();
+        validator.showErrors({
+          userName: "User Name already exists." // Thông báo lỗi trùng email
+        });
+      }
+
+      if (email || phone || userName) {
+        return false;
+      } else {
+        return true;
+      }
+
+    }
+    function createObjectEmployee(fullName, phone, email, address, userName, password, role, avatar) {
+      var object = {
+        full_name: fullName,
+        phone: phone,
+        email: email,
+        address: address,
+        user_name: userName,
+        pass: password,
+        status: "active",
+        role: role === "Employee" ? 0 : 1,
+        avatar: avatar
+      }
+      return object;
+    }
+    // $("#btnSave").on("click", async function () {
+    //   try {
+    //     // alert("Form successful submitted!");
+    //     var fullName = $("#inputFullName").val();
+    //     var phone = $("#inputPhone").val();
+    //     var email = $("#inputEmail").val();
+    //     var address = $("#inputAddress").val();
+    //     var userName = $("#inputUserName").val();
+    //     var password = $("#inputPassword").val();
+    //     var role = $("#role").val();
+    //     var checkInput = await duplicateCheck(email, phone, userName)
+    //     // var object = createObjectEmployee(fullName, phone, email, address, userName, password, role, null);
+    //     // var stateCreateEmployee = await createEmployee(object);
+    //     // setTimeout(function () {
+    //     //   if (stateCreateEmployee) {
+    //     //     alert("tao thanh cong");
+    //     //   } else {
+    //     //     alert("tao that bai");
+    //     //   }
+    //     // }, 1000);
+    //     if (checkInput) {
+    //       alert("input ok")
+    //     } else {
+    //       alert("input ko hopwj le")
+    //     }
+    //   } catch (error) {
+    //     alert(error)
+    //   }
+    // })
+    $(function () {
+      // $.validator.setDefaults({
+      //   submitHandler: async function (event) {
+      //     try {
+      //       event.preventDefault();
+      //       // alert("Form successful submitted!");
+      //       var fullName = $("#inputFullName").val();
+      //       var phone = $("#inputPhone").val();
+      //       var email = $("#inputEmail").val();
+      //       var address = $("#inputAddress").val();
+      //       var userName = $("#inputUserName").val();
+      //       var password = $("#inputPassword").val();
+      //       var role = $("#role").val();
+      //       var checkInput = await duplicateCheck(email, phone, userName)
+      //       // var object = createObjectEmployee(fullName, phone, email, address, userName, password, role, null);
+      //       // var stateCreateEmployee = await createEmployee(object);
+      //       // setTimeout(function () {
+      //       //   if (stateCreateEmployee) {
+      //       //     alert("tao thanh cong");
+      //       //   } else {
+      //       //     alert("tao that bai");
+      //       //   }
+      //       // }, 1000);
+      //       if (checkInput) {
+      //         alert("input ok")
+      //       } else {
+      //         alert("input ko hopwj le")
+      //       }
+      //     } catch (error) {
+      //       alert(error)
+      //     }
+
+
+      //   }
+      // });
+
+      $('#quickForm').submit(async function (event) {
+        event.preventDefault();
+        try {
+
+          // alert("Form successful submitted!");
+          //lay gia tri
+          var fullName = $("#inputFullName").val();
+          var phone = $("#inputPhone").val();
+          var email = $("#inputEmail").val();
+          var address = $("#inputAddress").val();
+          var userName = $("#inputUserName").val();
+          var password = $("#inputPassword").val();
+          var role = $("#role").val();
+          //kt trung
+          var checkInput = false;
+          checkInput = await duplicateCheck(email, phone, userName)
+
+          if (checkInput && fullName && phone && email && address && userName && password) {
+            //tao employee
+            var object = createObjectEmployee(fullName, phone, email, address, userName, password, role, null);
+            var stateCreateEmployee = await createEmployee(object);
+            if (stateCreateEmployee) {
+              Swal.fire(
+                {
+
+                  icon: 'success',
+                  title: 'Thêm thông tin thành công',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+            } else {
+              Swal.fire({
+                icon: 'error',
+                title: 'Thêm thông tin không thành công',
+                text: 'Thêm thông tin không thành công.',
+
+              })
+            }
+
+            //tieeps tucj submit
+            // $(this).unbind("submit").submit();
+          } else {
+            //ko tao employee
+          }
+        } catch (error) {
+          alert(error)
+        }
+      })
+      $('#quickForm').validate({
+        rules: {
+          email: {
+            required: true,
+            email: true,
+          },
+          password: {
+            required: true,
+            minlength: 6,
+
+          },
+          fullName: {
+            required: true,
+
+          },
+          phone: {
+            required: true,
+            minlength: 10
+          },
+          address: {
+            required: true,
+
+          },
+          userName: {
+            required: true,
+            minlength: 8
+          },
+          confirmPassword: {
+            required: true,
+            equalTo: "#inputPassword"
+          },
+        },
+        messages: {
+          email: {
+            required: "Please enter a email address",
+            email: "Please enter a valid email address"
+          },
+          fullName: {
+            required: "Please enter full name",
+
+          },
+          phone: {
+            required: "Please enter a phone",
+            minlength: "Please enter a valid phone"
+          },
+          address: {
+            required: "Please enter a address",
+
+          },
+          userName: {
+            required: "Please enter a userName",
+            minlength: "Your user name must be at least 8 characters long"
+          },
+          confirmPassword: {
+            equalTo: "Confirm password is incorrect",
+            required: "Please provide a password",
+
+          },
+          password: {
+
+            required: "Please provide a password",
+            minlength: "Your password must be at least 6 characters long"
+          },
+
+        },
+        errorElement: 'span',
+        errorPlacement: function (error, element) {
+          error.addClass('invalid-feedback');
+          element.closest('.input').append(error);
+        },
+        highlight: function (element, errorClass, validClass) {
+          $(element).addClass('is-invalid');
+        },
+        unhighlight: function (element, errorClass, validClass) {
+          $(element).removeClass('is-invalid');
+        }
+      });
+    });
+    $("#btnCancel").on("click", function () {
+      $("#quickForm").resetForm();
+    })
+
+  </script>
+</body>
+
+</html>

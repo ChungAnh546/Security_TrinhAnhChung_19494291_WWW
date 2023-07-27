@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Login</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" type="text/css" th:href="@{/plugins/toastr/toastr.min.css}">
+  <link rel="stylesheet" type="text/css"
+    th:href="@{https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" type="text/css" th:href="@{/plugins/fontawesome-free/css/all.min.css}">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" type="text/css" th:href="@{/plugins/icheck-bootstrap/icheck-bootstrap.min.css}">
+  <!-- Theme style -->
+  <link rel="stylesheet" type="text/css" th:href="@{/dist/css/adminlte.min.css}">
+  <style>
+    body {
+      /* background-image: url('/public/picture2.jpg'); */
+      background-repeat: no-repeat;
+      background-size: cover;
+      /* background-position: center; */
+    }
+
+    .g-recaptcha {
+      transform: scale(1.055);
+      height: 100%;
+    }
+
+    .containerCaptcha {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body class="hold-transition login-page">
+  <div class="login-box">
+    <!-- /.login-logo -->
+    <div class="card card-outline card-primary">
+      <div class="card-header text-center">
+        <a th:href="@{#}" class="h1"><b>HR</b>Manager</a>
+      </div>
+      <div class="card-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+        <!-- -->
+        <form method="POST" th:action="@{/j_spring_security_check}" id="formLogin">
+          <div class="input-group mb-3">
+            <input type="text" name="username" class="form-control input" placeholder="User Name" id="inputEmail"
+              required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <input type="password" name="password" class="form-control input" placeholder="Password" id="inputPassword"
+              required>
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-lock"></span>
+              </div>
+            </div>
+          </div>
+          <div class="input-group mb-3">
+            <span id="spanError" style="color: red;"></span>
+          </div>
+          <!-- <div class="input-group mb-3 text-center containerCaptcha">
+
+            <div class="g-recaptcha" id="html_element"></div>
+
+          </div> -->
+
+
+          <div class="row">
+            <div class="col-8">
+              <div class="icheck-primary">
+                <input type="checkbox" id="remember">
+                <label for="remember">
+                  Remember Me
+                </label>
+              </div>
+            </div>
+            <!-- /.col -->
+            <div class="col-4">
+              <button class="btn btn-primary btn-block" type="submit" id="btnSignIn">Sign In</button>
+            </div>
+            <!-- /.col -->
+          </div>
+        </form>
+
+        <!-- <div class="social-auth-links text-center mt-2 mb-3">
+          <a th:href="#" class="btn btn-block btn-primary">
+            <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+          </a>
+          <a th:href="#" class="btn btn-block btn-danger">
+            <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+          </a>
+        </div> -->
+        <!-- /.social-auth-links -->
+
+        <p class="mb-1 ">
+          <a th:href="@{#}">I forgot my password</a>
+        </p>
+        <p class="mb-0">
+          <a th:href="@{#}" class="text-center">Register a new membership</a>
+        </p>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+  <!-- /.login-box -->
+
+  <!-- jQuery -->
+  <script th:src="@{/plugins/jquery/jquery.min.js}"></script>
+  <!-- Bootstrap 4 -->
+  <script th:src="@{/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <!-- AdminLTE App -->
+  <script th:src="@{/dist/js/adminlte.min.js}"></script>
+  <script th:src="@{/plugins/jquery-validation/additional-methods.min.js}"></script>
+  <script th:src="@{/plugins/jquery-validation/jquery.validate.min.js}"></script>
+  <script th:src="@{/plugins/toastr/toastr.min.js}"></script>
+
+  <script th:src="@{https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit}" async defer>
+  </script>
+
+  <!-- <script
+    th:src="@{https://www.google.com/recaptcha/enterprise.js?render=6LfqR7ElAAAAAEjgmGLWVLF6ZBAzeV-I5RsqyBkg}"></script> -->
+
+
+
+
+  <script type="text/javascript">
+    $(
+      function () {
+        var randomNumber = Math.floor(Math.random() * 5) + 1;
+        $('body').css('background-image', 'url( /public/picture' + randomNumber + '.jpg )');
+        $('#formLogin').validate({
+          rules: {
+            username: {
+              required: true,
+
+            },
+            password: {
+              required: true,
+
+            },
+
+          },
+          messages: {
+            username: {
+              required: "Please enter a email address",
+
+            },
+            password: {
+              required: "Please enter password",
+
+            },
+
+
+
+          },
+          errorElement: 'span',
+          errorPlacement: function (error, element) {
+            error.addClass('invalid-feedback');
+            element.closest('.input').append(error);
+          },
+          highlight: function (element, errorClass, validClass) {
+            $(element).addClass('is-invalid');
+          },
+          unhighlight: function (element, errorClass, validClass) {
+            $(element).removeClass('is-invalid');
+          }
+        });
+      }
+    )
+    function saveLocalStorage(object) {
+      localStorage.removeItem('acc');
+
+      localStorage.setItem('acc', JSON.stringify(object));
+
+    }
+    $(document).ready(function () {
+      $('#formLogin').submit(async function (event) {
+        event.preventDefault();
+        ////
+        var email = $('#inputEmail').val();
+        var password = $('#inputPassword').val();
+        //  var checkCaptcha = grecaptcha.getResponse()
+        if (email && password) {//&& checkCaptcha
+
+          // validateInputValid('#inputEmail');
+
+          var login = await apiSignIn(email, password);
+
+          if (login) {
+            //lưu 
+            var employee = await getEmployeeLogin(email)
+            saveLocalStorage(employee);
+            this.submit();
+          } else {
+            var validator = $("#formLogin").validate();
+            validator.showErrors({
+              username: "Phone already exists.",
+              password: "Phone already exists."// Thông báo lỗi trùng email
+            });
+            $("#spanError").text("Login failed");
+          }
+
+        } else {
+          // if (!checkCaptcha) {
+          //   NotificationInfo("reCaptcha");
+          // }
+        }
+      });
+    });
+    var onloadCallback = function () {
+      grecaptcha.render('html_element', {
+        'sitekey': '6LcK37ElAAAAAHfpDhlSkvTNDb9v0ESt2CbIlazi',
+        'theme': 'light'
+      });
+    };
+    async function getEmployeeLogin(user) {
+      var employee;
+      try {
+        employee = await $.ajax({
+          type: "GET",
+          url: "/login/user-login?user=" + user,
+          dataType: "json",
+          success: function (response) {
+
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            return null
+          }
+        });
+      } catch (error) {
+        employee = null;
+      }
+      return employee;
+
+    }
+    async function apiCheckEmail(user, password) {
+      var url = "/login/user-name";
+      var Account;
+      try {
+        await $.get("/login/user-name", { user: user, password: password }, function (data) {
+          // Xử lý dữ liệu trả về ở đây
+
+          Account = data;
+
+        });
+      } catch (error) {
+        Account = false;
+      }
+      return Account;
+    }
+    async function apiSignIn(user, password) {
+      var apiEmail = await apiCheckEmail(user, password);
+      if (apiEmail) {
+        return true;
+      } else {
+        return false;
+      }
+
+
+    }
+
+    $('#btnSignIn').click(async function () {
+
+    });
+    function setUp(id) {
+      revalidateInput(id);
+      var inputDate = $(id).val();
+
+      if (inputDate) {
+        validateInputValid(id);
+        return inputDate;
+      } else {
+
+        validateInputInValid(id);
+        return null;
+
+      }
+    }
+
+    function NotificationErr(text) {
+      toastr.error(text);
+    }
+    function NotificationInfo(text) {
+      toastr.info(text);
+    }
+    function setUpEmail(id) {
+      revalidateInput(id);
+      var inputDate = $(id).val();
+      const regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
+      if (inputDate.match(regex)) {
+        validateInputValid(id);
+        return inputDate;
+      } else {
+
+        validateInputInValid(id);
+        return null;
+
+      }
+    }
+
+    function revalidateInput(id) {
+      $(id).removeClass('is-invalid');
+      $(id).removeClass('is-valid');
+    }
+    function validateInputInValid(id) {
+      $(id).addClass('is-invalid');
+      $(id).removeClass('is-valid');
+    }
+    function validateInputValid(id) {
+      $(id).removeClass('is-invalid');
+      $(id).addClass('is-valid');
+    }
+  </script>
+</body>
+
+</html>

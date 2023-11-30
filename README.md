@@ -14,7 +14,8 @@ Employee
 >![img_1](https://github.com/ChungAnh546/Security_TrinhAnhChung_19494291_WWW/assets/92380932/007dc730-d9d4-4d50-96bb-4b33b2a75b10)
 
 Customer
->![Uploading img_2.png…]()
+>![img_2](https://github.com/ChungAnh546/Security_TrinhAnhChung_19494291_WWW/assets/92380932/bc9e715c-7c88-42ae-b244-eda9cb73c544)
+
 
 ## The tools that have been used
 - IDE: IntelliJ
